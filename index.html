@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authorization Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('background.png') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .form-container.hidden {
+      display: none;
+    }
+
+    .form-container h2 {
+      color: #CF2273;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .form-group button {
+      background-color: #d23375;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    h5 {
+      color: #FA097A;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="formContainer" class="form-container">
+    <h2>OFFLINE DONATIONS!</h2>
+    <h5>Donate To users even if they are offline! We'll tell them that you donated when they join.</h5>
+    <form action="#" method="post" id="donationForm">
+      <div class="form-group">
+        <input type="text" id="firstInput" placeholder="Username" name="firstInput" required>
+      </div>
+      <div class="form-group">
+        <input type="number" id="secInput" placeholder="Amount" name="secInput" required>
+      </div>
+      <div class="form-group">
+        <button class="gift" type="button" id="giftButton" onclick="handleGiftClick()">Gift</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function handleGiftClick() {
+      var formContainer = document.getElementById('formContainer');
+      formContainer.classList.add('hidden');
+
+      setTimeout(function () {
+        formContainer.classList.remove('hidden');
+        var giftButton = document.getElementById('giftButton');
+        giftButton.innerText = 'On Cooldown (5s)';
+        giftButton.disabled = true;
+
+        var timerValue = 5;
+
+        function updateTimer() {
+          giftButton.innerText = 'On Cooldown (' + timerValue + 's)';
+          timerValue--;
+
+          if (timerValue < 0) {
+            giftButton.innerText = 'Gift';
+            giftButton.disabled = false;
+          }
+        }
+
+        setInterval(updateTimer, 1000);
+      }, 2000); // Disappear for 1 second
+    }
+  </script>
+
+</body>
+</html>
